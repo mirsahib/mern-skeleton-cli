@@ -19,6 +19,7 @@
   "author": "Mir Sahib",
   "license": "MIT",
   "dependencies": {
+    "shelljs": "^0.8.4",
     "yargs": "^17.1.1"
   }
 }
