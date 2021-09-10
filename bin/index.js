@@ -1,9 +1,26 @@
 #! /usr/bin/env node
 const yargs = require("yargs");
-const usage = "\nUsage: tran <lang_name> sentence to be translated";const options = yargs  
-      .usage(usage)  
-      .option("l", {alias:"languages", describe: "List all supported languages.", type: "boolean", demandOption
-: false })                                                                                                    
-      .help(true)  
-      .argv;
-console.log("Hello World!");
+const utils = require("./utils");
+const argv = yargs.argv
+
+const usage = "\nUsage: mern <command> [options]";
+
+const options = yargs
+      .command("create", "<Project Name> Create a new mern project",
+            {
+                  project:
+                        { describe: "Name of the project", alias: 'p', default: "mern-skeleton" }
+            }
+      )
+      .help()
+      .alias('help', 'h')
+      .argv
+
+// show help
+if (options._[0] == null) {
+      utils.showHelp();
+      return;
+}else{
+      utils.createProject(options)
+}
+
