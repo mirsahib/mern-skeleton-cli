@@ -1,3 +1,6 @@
+
+const shell =require('shelljs')
+
 function showHelp() {
     //onsole.log(usage);
     console.log('\nOptions:\r')
@@ -7,8 +10,13 @@ function showHelp() {
 
 }
 function createProject(options) {
+    //console.table(options)
+    //console.log(options.p)
     if(options._[0]==="create"){
-        shell.exec('git clone https://github.com/atomicptr/dauntless-builder')
+        shell.exec(`git clone https://github.com/shamahoque/mern-skeleton.git ${options.p}`)
+        //shell.mkdir(`${options.p}`)
+        shell.cd(`${options.p}/`)
+        shell.exec("npm i")
     }
 }
 
