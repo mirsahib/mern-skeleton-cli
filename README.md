@@ -9,7 +9,7 @@ The mern CLI is a command-line interface tool that helps you to initialize, deve
 # Installation
 
 ```bash
-npm install -g mern-cli
+npm install -g mern-skeleton-cli
 ```
 
 # What is MERN-Skeleton
