@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="images/mern.png" width="200" alt="Nest Logo" /></a>
+  <a href="https://github.com/mirsahib/mern-cli" target="blank"><img src="https://raw.githubusercontent.com/mirsahib/mern-cli/main/images/mern.png" width="200" alt="Mern-Skeleton-Cli" /></a>
 </p>
 
 # Description
