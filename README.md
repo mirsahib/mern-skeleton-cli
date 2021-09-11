@@ -6,7 +6,7 @@
 
 The mern CLI is a command-line interface tool that helps you to initialize, develop, and maintain your mern-skeleton project.
 
-## Installation
+# Installation
 
 ```bash
 npm install -g mern-cli
