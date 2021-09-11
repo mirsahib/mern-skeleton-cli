@@ -9,7 +9,7 @@ const options = yargs
       .command("create", "<Project Name> Create a new mern project",
             {
                   project:
-                        { describe: "Name of the project", alias: 'p', default: "mern-skeleton" }
+                        { describe: "Name of the project", alias: 'p',demandOption:true }
             }
       )
       .help()
