@@ -1,6 +1,6 @@
 {
   "name": "mern-cli",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha",
   "description": "A command line interface for mern-skeleton",
   "main": "bin/index.js",
   "scripts": {
