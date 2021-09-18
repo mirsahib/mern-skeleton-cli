@@ -19,6 +19,7 @@
   "author": "Mir Sahib",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^8.2.0",
     "shelljs": "^0.8.4"
   }
