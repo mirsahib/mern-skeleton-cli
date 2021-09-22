@@ -25,9 +25,9 @@ program.command('create')
                   if (args.project) {
                         util.createProject(args.project)
                   } else if (args.controller) {
-                        util.createProject(args.controller)
+                        util.createController(args.controller)
                   } else if (args.router) {
-                        util.createProject(args.router)
+                        util.createRouter(args.router)
                   } else {
                         log(chalk.red.bold('error: Something went wrong'))
                   }

@@ -28,10 +28,39 @@ function createProject(name) {
 }
 
 function createController(name) {
-    console.log('create controller', name)
+    //check if server/controllers folder exist
+    fs.access('server/controllers',(err)=>{
+        
+        if(err){
+            log(chalk.red.bold(`error: server/controllers does not exist`))
+        }else{
+            //check if server/routes/${name}.routes.js exist
+            if(fs.existsSync(`server/routes/${name}.controller.js`)){
+                log(chalk.red.bold('File already exist please choose a different file name'))
+            }else{
+                shell.exec(`touch server/controllers/${name}.controller.js`)
+                log(chalk.green.bold('File created successfully'))
+            }
+        }
+    })
+    
+
 }
 function createRouter(name) {
-    console.log('create router', name)
+    //check if server/routes folder exist
+    fs.access('server/routes',(err)=>{
+        if(err){
+            log(chalk.red.bold(`error: server/routes does not exist`))
+        }else{
+            //check if server/routes/${name}.routes.js exist
+            if(fs.existsSync(`server/routes/${name}.routes.js`)){
+                log(chalk.red.bold('File already exist please choose a different file name'))
+            }else{
+                shell.exec(`touch server/routes/${name}.routes.js`)
+                log(chalk.green.bold('File created successfully'))
+            }
+        }
+    })
 }
 
 
