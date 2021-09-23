@@ -1,6 +1,10 @@
 
 const shell = require('shelljs')
 const chalk = require('chalk')
+const { render } = require('template-file');
+const { controllerTemplate } = require('../template/controller.js')
+const modelTemplate = require('../template/model.js')
+const routerTemplate = require('../template/router.js')
 const fs = require("fs")
 const log = console.log
 
@@ -29,44 +33,77 @@ function createProject(name) {
 
 function createController(name) {
     //check if server/controllers folder exist
-    fs.access('server/controllers',(err)=>{
-        
-        if(err){
+    fs.access('server/controllers', (err) => {
+        if (err) {
             log(chalk.red.bold(`error: server/controllers does not exist`))
-        }else{
-            //check if server/routes/${name}.routes.js exist
-            if(fs.existsSync(`server/routes/${name}.controller.js`)){
+        } else {
+            //check if server/routes/${name}.controllers.js exist
+            if (fs.existsSync(`server/controllers/${name}.controller.js`)) {
                 log(chalk.red.bold('File already exist please choose a different file name'))
-            }else{
-                shell.exec(`touch server/controllers/${name}.controller.js`)
-                log(chalk.green.bold('File created successfully'))
+            } else {
+                //prettify controller name 
+                const data = {
+                    item: { 
+                        name: name.charAt(0).toUpperCase() + name.slice(1),
+                        nameToLower: name.toLowerCase(),
+                        namePlural: name.toLowerCase() + 's' ,
+                        functionName:name.toLowerCase() + 'ByID',
+                        deletedName: 'deleted'+ name.charAt(0).toUpperCase() + name.slice(1)
+                    }
+                };
+                //create the template
+                const result = render(controllerTemplate, data)
+                //write the controller file
+                fs.writeFile(`server/controllers/${name}.controller.js`, result, function (err) {
+                    if (err) throw err;
+                    log(chalk.green.bold('File created successfully'))
+                });
             }
         }
     })
-    
+
 
 }
 function createRouter(name) {
     //check if server/routes folder exist
-    fs.access('server/routes',(err)=>{
-        if(err){
+    fs.access('server/routes', (err) => {
+        if (err) {
             log(chalk.red.bold(`error: server/routes does not exist`))
-        }else{
-            //check if server/routes/${name}.routes.js exist
-            if(fs.existsSync(`server/routes/${name}.routes.js`)){
+        } else {
+            //check if server/routes/${name}.routes.js file exist
+            if (fs.existsSync(`server/routes/${name}.routes.js`)) {
                 log(chalk.red.bold('File already exist please choose a different file name'))
-            }else{
-                shell.exec(`touch server/routes/${name}.routes.js`)
+            } else {
+                //shell.exec(`touch server/routes/${name}.routes.js`)
                 log(chalk.green.bold('File created successfully'))
             }
         }
     })
 }
+
+function createModel(name){
+    //check if server/models exist
+    fs.access('server/models', (err) => {
+        if (err) {
+            log(chalk.red.bold(`error: server/models does not exist`))
+        } else {
+            //check if server/models/${name}.model.js file exist
+            if (fs.existsSync(`server/models/${name}.model.js`)) {
+                log(chalk.red.bold('File already exist please choose a different file name'))
+            } else {
+                //shell.exec(`touch server/models/${name}.model.js`)
+                log(chalk.green.bold('File created successfully'))
+            }
+        }
+    })
+}
+
 
 
 module.exports = {
     showHelp,
     createProject,
     createController,
-    createRouter
+    createRouter,
+    createModel
 }
