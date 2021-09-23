@@ -18,6 +18,7 @@ program.command('create')
       .option('-p, --project <name>', 'Create a new mern project')
       .option('-c, --controller <name>', 'Create a new controller')
       .option('-r, --router <name>', "Create a new router")
+      .option('-m, --model <name>','Create a new mode')
       .action((args) => {
             //allow only one argument
             let argsLength = Object.keys(args).length
@@ -28,7 +29,10 @@ program.command('create')
                         util.createController(args.controller)
                   } else if (args.router) {
                         util.createRouter(args.router)
-                  } else {
+                  }else if(args.model){
+                        util.createModel(args.model)
+                  } 
+                  else {
                         log(chalk.red.bold('error: Something went wrong'))
                   }
 
