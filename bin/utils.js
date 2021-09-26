@@ -41,23 +41,28 @@ function createController(name) {
             if (fs.existsSync(`server/controllers/${name}.controller.js`)) {
                 log(chalk.red.bold('File already exist please choose a different file name'))
             } else {
-                //prettify controller name 
-                const data = {
-                    item: { 
-                        name: name.charAt(0).toUpperCase() + name.slice(1),
-                        nameToLower: name.toLowerCase(),
-                        namePlural: name.toLowerCase() + 's' ,
-                        functionName:name.toLowerCase() + 'ByID',
-                        deletedName: 'deleted'+ name.charAt(0).toUpperCase() + name.slice(1)
-                    }
-                };
-                //create the template
-                const result = render(controllerTemplate, data)
-                //write the controller file
-                fs.writeFile(`server/controllers/${name}.controller.js`, result, function (err) {
-                    if (err) throw err;
-                    log(chalk.green.bold('File created successfully'))
-                });
+                //check if model file exist with same name
+                if(fs.existsSync(`server/models/${name}.model.js`)){
+                    const data = {
+                        item: { 
+                            name: name.charAt(0).toUpperCase() + name.slice(1),
+                            modelName:name.toLowerCase(),
+                            nameToLower: name.toLowerCase(),
+                            namePlural: name.toLowerCase() + 's' ,
+                            functionName:name.toLowerCase() + 'ByID',
+                            deletedName: 'deleted'+ name.charAt(0).toUpperCase() + name.slice(1)
+                        }
+                    };
+                    //create the template
+                    const result = render(controllerTemplate, data)
+                    //write the controller file
+                    fs.writeFile(`server/controllers/${name}.controller.js`, result, function (err) {
+                        if (err) throw err;
+                        log(chalk.green.bold('File created successfully'))
+                    });
+                }else{
+                    log(chalk.yellow.bold("model file doesn't exist\nplease create a model file with same name as the controller"))
+                }
             }
         }
     })
