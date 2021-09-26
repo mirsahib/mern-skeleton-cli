@@ -24,6 +24,33 @@ MERN-Skeleton a skeleton application with basic user CRUD and auth features - de
 | `mern create` | `-c,--controller <name>` | Create a new controller eg: `mern create -c company` |
 | `mern create` | `-r,--router <name>` | Create a new routes eg: `mern create -r company` |
 
+Finally add the routes to `server/express.js`
+```
+import express from 'express'
+import path from 'path'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import compress from 'compression'
+import cors from 'cors'
+import helmet from 'helmet'
+import Template from './../template'
+import userRoutes from './routes/user.routes'
+import authRoutes from './routes/auth.routes'
+import CompanyRoutes from './routes/company.routes' <=== import your routes here
+
+
+....
+
+// mount routes
+app.use('/', userRoutes)
+app.use('/', authRoutes)
+app.use('/',CompanyRoutes) <===== add your routes here
+
+....
+
+export default app
+```
+
 # Contribution
 
 ## Project Installation
