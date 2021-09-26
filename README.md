@@ -16,6 +16,14 @@ npm install -g mern-skeleton-cli
 MERN-Skeleton a skeleton application with basic user CRUD and auth features - developed using React, Node, Express and MongoDB <br>
 [MERN-Skeleton Repo](https://github.com/shamahoque/mern-skeleton)
 
+# Command Structure
+| Command | Option | Description
+| --- | --- | --- |
+| `mern create` | `-p,--project <name>` | Create a new project eg: `mern create -p myproject` |
+| `mern create` | `-m,--model <name>` | Create a new model eg: `mern create -m company` |
+| `mern create` | `-c,--controller <name>` | Create a new controller eg: `mern create -c company` |
+| `mern create` | `-r,--router <name>` | Create a new routes eg: `mern create -r company` |
+
 # Contribution
 
 ## Project Installation
