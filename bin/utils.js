@@ -74,8 +74,31 @@ function createRouter(name) {
             if (fs.existsSync(`server/routes/${name}.routes.js`)) {
                 log(chalk.red.bold('File already exist please choose a different file name'))
             } else {
-                //shell.exec(`touch server/routes/${name}.routes.js`)
-                log(chalk.green.bold('File created successfully'))
+                //check if controller file exist with same name
+                if(fs.existsSync(`server/controllers/${name}.controller.js`)){
+                    //controller exist,create a new router file and also import the controller
+                    const data = {
+                        item: { 
+                            controller: name.toLowerCase()+'Ctrl',
+                            controllerPath:name.toLowerCase()+'.controller',
+                            routesName:name.charAt(0).toUpperCase() + name.slice(1),
+                            routesId:name.toLowerCase()+'Id',
+                            functionName:name.toLowerCase() + 'ByID'
+                        }
+                    };
+                    //create the template
+                    const result = render(routerTemplate, data)
+                    //write the model file
+                    fs.writeFile(`server/routes/${name}.routes.js`, result, function (err) {
+                        if (err) throw err;
+                        log(chalk.green.bold('File created successfully'))
+                    });
+
+                }else{
+                    //give a warning
+                    log(chalk.yellow.bold("controller file doesn't exist\nplease create a controller file with same name as the routes"))
+                }
+                        
             }
         }
     })
@@ -91,8 +114,7 @@ function createModel(name){
             if (fs.existsSync(`server/models/${name}.model.js`)) {
                 log(chalk.red.bold('File already exist please choose a different file name'))
             } else {
-                //shell.exec(`touch server/models/${name}.model.js`)
-                //prettify controller name 
+                //prettify model name 
                 const data = {
                     item: { 
                         schemaName: name.charAt(0).toUpperCase()+name.slice(1)+'Schema',

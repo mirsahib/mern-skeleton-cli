@@ -1,19 +1,19 @@
 const routerTemplate = `import express from 'express'
-import userCtrl from '../controllers/user.controller'
+import {{item.controller}} from '../controllers/{{item.controllerPath}}'
 import authCtrl from '../controllers/auth.controller'
 
 const router = express.Router()
 
-router.route('/api/users')
-  .get(userCtrl.list)
-  .post(userCtrl.create)
+router.route('/api/{{item.routesName}}')
+  .get({{item.controller}}.list)
+  .post({{item.controller}}.create)
 
-router.route('/api/users/:userId')
-  .get(authCtrl.requireSignin, userCtrl.read)
-  .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
-  .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove)
+router.route('/api/{{item.routesName}}/:{{item.routesId}}')
+  .get(authCtrl.requireSignin, {{item.controller}}.read)
+  .put(authCtrl.requireSignin, authCtrl.hasAuthorization, {{item.controller}}.update)
+  .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, {{item.controller}}.remove)
 
-router.param('userId', userCtrl.userByID)
+router.param('{{item.routesId}}', {{item.controller}}.{{item.functionName}})
 
 export default router`
 
