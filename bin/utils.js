@@ -3,8 +3,8 @@ const shell = require('shelljs')
 const chalk = require('chalk')
 const { render } = require('template-file');
 const { controllerTemplate } = require('../template/controller.js')
-const modelTemplate = require('../template/model.js')
-const routerTemplate = require('../template/router.js')
+const {modelTemplate} = require('../template/model.js')
+const {routerTemplate} = require('../template/router.js')
 const fs = require("fs")
 const log = console.log
 
@@ -92,7 +92,20 @@ function createModel(name){
                 log(chalk.red.bold('File already exist please choose a different file name'))
             } else {
                 //shell.exec(`touch server/models/${name}.model.js`)
-                log(chalk.green.bold('File created successfully'))
+                //prettify controller name 
+                const data = {
+                    item: { 
+                        schemaName: name.charAt(0).toUpperCase()+name.slice(1)+'Schema',
+                        modelName:name.charAt(0).toUpperCase() + name.slice(1)
+                    }
+                };
+                //create the template
+                const result = render(modelTemplate, data)
+                //write the model file
+                fs.writeFile(`server/models/${name}.model.js`, result, function (err) {
+                    if (err) throw err;
+                    log(chalk.green.bold('File created successfully'))
+                });
             }
         }
     })
