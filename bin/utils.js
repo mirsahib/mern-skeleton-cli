@@ -86,7 +86,7 @@ function createRouter(name) {
                         item: { 
                             controller: name.toLowerCase()+'Ctrl',
                             controllerPath:name.toLowerCase()+'.controller',
-                            routesName:name.charAt(0).toUpperCase() + name.slice(1),
+                            routesName:name.toLowerCase(),
                             routesId:name.toLowerCase()+'Id',
                             functionName:name.toLowerCase() + 'ByID'
                         }
