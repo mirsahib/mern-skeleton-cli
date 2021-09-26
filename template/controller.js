@@ -1,4 +1,4 @@
-const controllerTemplate = `import {{item.name}} from '../models/{{item.name}}.model'
+const controllerTemplate = `import {{item.name}} from '../models/{{item.modelName}}.model'
 import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
 
