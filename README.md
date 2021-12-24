@@ -59,6 +59,11 @@ export default app
 git clone https://github.com/mirsahib/mern-cli.git
 cd mern-cli
 npm i
+
+// add command
+cd bin
+node index <your command structure> //eg: node index create -p test
+
 ```
 
 If you want to **contribute** and make this project much better for other developer have a look at [Issues](https://github.com/mirsahib/mern-cli/issues).
