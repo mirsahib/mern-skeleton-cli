@@ -55,7 +55,7 @@ export default app
 
 ## Project Installation
 
-```bash
+```js
 git clone https://github.com/mirsahib/mern-cli.git
 cd mern-cli
 npm i
