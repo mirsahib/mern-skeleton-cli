@@ -24,6 +24,12 @@ function createProject(name) {
             log(chalk.red.bold(`error: ${name} folder alread exist,please try another name`))
         } else {
             shell.exec(`git clone https://github.com/shamahoque/mern-skeleton.git ${name}`)
+            log(chalk.green.bold(`cd ${name}`))
+            shell.cd(`${name}/`)
+            log(chalk.green.bold(`git remote rm origin`))
+            shell.exec(`git remote rm origin`)
+            log(chalk.green.bold(`cd ..`))
+            shell.cd('..')
             log(chalk.blue.bold('successfully created ' + chalk.yellow(`${name}`) + '\ncd' + chalk.yellow(` ${name}/`) + '\nnpm install\nnpm run development'))
         }
     } catch (e) {
